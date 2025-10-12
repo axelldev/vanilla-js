@@ -22,16 +22,13 @@ const Router = {
     switch (path) {
       case "/":
         pageElement = document.createElement("menu-page");
-        pageElement.textContent = "Welcome";
         break;
       case "/order":
         pageElement = document.createElement("order-page");
-        pageElement.textContent = "Your order";
         break;
       default:
         if (!path.startsWith("/product/")) return;
         pageElement = document.createElement("details-page");
-        pageElement.textContent = "Details";
         const id = path.substring(path.lastIndexOf("/") + 1);
         pageElement.dataset.id = id;
     }
