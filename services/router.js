@@ -15,24 +15,22 @@ const Router = {
     Router.go(location.pathname);
   },
   go: (path, add = true) => {
-    console.log(path);
     if (add) {
       history.pushState({ path }, null, path);
     }
-    console.log(`Going to ${path}`);
     let pageElement = null;
     switch (path) {
       case "/":
-        pageElement = document.createElement("h1");
-        pageElement.innerText = "Welcome!!";
+        pageElement = document.createElement("menu-page");
+        pageElement.textContent = "Welcome";
         break;
       case "/order":
-        pageElement = document.createElement("h1");
-        pageElement.innerText = "Your order";
+        pageElement = document.createElement("order-page");
+        pageElement.textContent = "Your order";
         break;
       default:
         if (!path.startsWith("/product/")) return;
-        pageElement = document.createElement("h1");
+        pageElement = document.createElement("details-page");
         pageElement.textContent = "Details";
         const id = path.substring(path.lastIndexOf("/") + 1);
         pageElement.dataset.id = id;
