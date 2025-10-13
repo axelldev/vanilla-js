@@ -1,5 +1,6 @@
 import Store from "./services/store.js";
 import { loadData } from "./services/menu.js";
+import "./components/ProductItem.js";
 import "./components/MenuPage.js";
 import "./components/DetailsPage.js";
 import Router from "./services/router.js";

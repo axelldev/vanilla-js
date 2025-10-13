@@ -30,7 +30,7 @@ const Router = {
         if (!path.startsWith("/product/")) return;
         pageElement = document.createElement("details-page");
         const id = path.substring(path.lastIndexOf("/") + 1);
-        pageElement.dataset.id = id;
+        pageElement.dataset.productId = id;
     }
     if (!pageElement) return;
     const main = document.querySelector("main");

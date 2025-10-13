@@ -36,7 +36,7 @@ export class MenuPage extends HTMLElement {
         `;
         menu.appendChild(liCategory);
         category.products.forEach((product) => {
-          const item = document.createElement("li");
+          const item = document.createElement("product-item");
           item.dataset.product = JSON.stringify(product);
           item.innerText = product.name;
           liCategory.getElementsByClassName("category");
