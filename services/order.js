@@ -2,11 +2,15 @@ import { getProductById } from "./menu.js";
 
 export const addToCart = async (id) => {
   const product = await getProductById(id);
-  const results = app.store.cart.filter((p) => p.product.id == id);
-  if (results.length === 1) {
+  const isOnTheCart = app.store.cart.some((p) => {
+    return p.product.id === id;
+  });
+
+  if (isOnTheCart) {
     app.store.cart = app.store.cart.map((p) =>
-      p.id == id ? { ...p, quantity: p.quantity + 1 } : p
+      p.product.id === id ? { ...p, quantity: p.quantity + 1 } : p
     );
+    console.log(app.store.cart);
   } else {
     app.store.cart = [...app.store.cart, { product, quantity: 1 }];
   }

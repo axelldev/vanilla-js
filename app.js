@@ -1,4 +1,4 @@
-import Store from "./services/store.js";
+import Store, { getCartCount } from "./services/store.js";
 import { loadData } from "./services/menu.js";
 import "./components/ProductItem.js";
 import "./components/MenuPage.js";
@@ -12,4 +12,11 @@ app.router = Router;
 window.addEventListener("DOMContentLoaded", () => {
   loadData();
   app.router.init();
+});
+
+window.addEventListener("appcartchange", () => {
+  const badge = document.getElementById("badge");
+  const count = getCartCount();
+  badge.innerText = count;
+  badge.hidden = count === 0;
 });

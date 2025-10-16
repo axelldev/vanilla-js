@@ -16,4 +16,7 @@ const wrappedStore = new Proxy(Store, {
   },
 });
 
+export const getCartCount = () =>
+  app.store.cart.reduce((acc, item) => acc + item.quantity, 0);
+
 export default wrappedStore;
