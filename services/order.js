@@ -10,12 +10,12 @@ export const addToCart = async (id) => {
     app.store.cart = app.store.cart.map((p) =>
       p.product.id === id ? { ...p, quantity: p.quantity + 1 } : p
     );
-    console.log(app.store.cart);
   } else {
     app.store.cart = [...app.store.cart, { product, quantity: 1 }];
   }
 };
 
 export const removeFromCart = (id) => {
-  app.store.cart = app.store.cart.filter((p) => p.product.id == id);
+  const newCart = app.store.cart.filter((p) => p.product.id !== id);
+  app.store.cart = newCart;
 };
