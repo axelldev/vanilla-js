@@ -1,4 +1,10 @@
 export class OrderPage extends HTMLElement {
+  #user = {
+    name: "",
+    phone: "",
+    email: "",
+  };
+
   constructor() {
     super();
     this.root = this.attachShadow({ mode: "open" });
@@ -20,6 +26,10 @@ export class OrderPage extends HTMLElement {
       this.render();
     });
     this.render(0);
+    const form = this.root.querySelector("form");
+    if (form) {
+      this.setFormBindings(form);
+    }
   }
 
   render() {
@@ -54,6 +64,30 @@ export class OrderPage extends HTMLElement {
                 <p class='price-total'>$${total.toFixed(2)}</p>
             </li>                
         `;
+    }
+  }
+
+  setFormBindings(form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      alert(`Thanks for your order ${this.#user.name}`);
+      this.#user.name = "";
+      this.#user.phone = "";
+      this.#user.email = "";
+    });
+
+    this.#user = new Proxy(this.#user, {
+      set(target, prop, value) {
+        target[prop] = value;
+        form.elements[prop].value = value;
+        return true;
+      },
+    });
+    for (const input of form.elements) {
+      input.addEventListener("change", (event) => {
+        const value = event.target.value;
+        this.#user[input.name] = value;
+      });
     }
   }
 }
